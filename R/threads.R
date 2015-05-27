@@ -12,7 +12,7 @@ pubkey <- readChar(".pubkey", file.info(".pubkey")$size)
 #' @param thread integer or string if integer must be unique if string must
 #' have link: or ident:
 #' @param author
-#' @param since
+#' @param since integer or string timestamp iso or unixtime.
 #' @param related
 #' @param cursor
 #' @param attach
@@ -28,8 +28,11 @@ pubkey <- readChar(".pubkey", file.info(".pubkey")$size)
 #'
 #' # use a specific link ending with ".html" (may work if link was not changed)
 #' art <- "http://www.politico.com/magazine/story/2015/05/fox-news-liberals-118235.html"
-#' #art <- URLencode(art, reserved = TRUE)
 #' threads("list" , forum="politico", thread=paste0("link:", art))
+#'
+#' # use a timestamp
+#' unixtime <- as.numeric(as.POSIXct("2015-05-26", format="%Y-%m-%d"))
+#' threads("list", forum="politico", since=unixtime)
 #'
 #' @export
 threads <- function(option = NULL,
