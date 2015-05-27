@@ -1,0 +1,16 @@
+Package: disqusR
+Type: Package
+Title: Provides a link to the disqus api.
+Version: 0.1
+Date: 2015-05-27
+Authors@R: c(
+    person("Jan Marvin", "Garbuszus",
+    email = "jan.garbuszus@ruhr-uni-bochum.de", role = c("aut")),
+    person("Sebastian", "Jeworutzki",
+    email="Sebastian.Jeworutzki@ruhr-uni-bochum.de", role = c("aut", "cre"))
+    )
+Description: More about what it does (maybe more than one line)
+License: GPL2
+LazyData: TRUE
+Imports: httr, jsonlite
+ByteCompile: yes
