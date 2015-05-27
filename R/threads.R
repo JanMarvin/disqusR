@@ -28,29 +28,29 @@ pubkey <- readChar(".pubkey", file.info(".pubkey")$size)
 #'
 #' # use a specific link ending with ".html" (may work if link was not changed)
 #' art <- "http://www.politico.com/magazine/story/2015/05/fox-news-liberals-118235.html"
-#' threads("list" , forum="politico", thread=paste0("link:", art))
-#'
+#' postslist <- posts("list", thread=art[1,"id"])
 #' # use a timestamp
 #' unixtime <- as.numeric(as.POSIXct("2015-05-26", format="%Y-%m-%d"))
 #' threads("list", forum="politico", since=unixtime)
 #'
 #' @export
-threads <- function(option = NULL,
+listTemplate <- function(option = NULL,
                     category = NULL, forum = NULL, thread = NULL,
                     author = NULL, since = NULL, related = NULL,
                     cursor = NULL, attach = NULL, limit = 25,
-                    include = NULL, order = NULL, format = "json") {
+                    include = NULL, order = NULL, format = "json",
+                    resource = c("threads","posts")) {
 
   if (is.null(option))
     stop("No option was called.")
 
 
   disqus_api_url <- "https://disqus.com/api/3.0/"
-  threads_url <- "threads/"
+  resource_url <- paste0(resource,"/")
 
   # create minimal required link.
   option <- paste0(option, ".", format)
-  url <- paste0(disqus_api_url, threads_url, option)
+  url <- paste0(disqus_api_url, resource_url, option)
   auth <- paste0("?api_key=", pubkey)
 
   # Add apikey to link
@@ -125,3 +125,9 @@ threads <- function(option = NULL,
   #   forums <- forums$response
 
 }
+
+
+
+threads <- function(...) listTemplate(resource = "threads", ...)
+posts <- function(...) listTemplate(resource = "posts", ...)
+
