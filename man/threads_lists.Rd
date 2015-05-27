@@ -6,12 +6,49 @@
 \usage{
 threads_lists(category = NULL, forum = NULL, thread = NULL,
   author = NULL, since = NULL, related = NULL, cursor = NULL,
-  attach = NULL, limit = 25, include = NULL, order = "desc")
+  attach = NULL, limit = 25, include = NULL, order = "desc",
+  format = "json")
+}
+\arguments{
+\item{category}{integer}
+
+\item{forum}{integer/string unique identifier of a forum}
+
+\item{thread}{integer or string if integer must be unique if string must
+have link: or ident:}
+
+\item{author}{}
+
+\item{since}{}
+
+\item{related}{}
+
+\item{cursor}{}
+
+\item{attach}{}
+
+\item{limit}{integer between 25 (default) and 100 (maximum)}
+
+\item{include}{}
+
+\item{order}{string "desc" (descending) or "asc" (ascending)}
+
+\item{format}{string json, jsonp or rss}
 }
 \description{
 Disqus Threads: list API
 }
 \details{
-https://disqus.com/api/docs/threads/list/
+Original API Documentation for threads:list
+\code{https://disqus.com/api/docs/threads/list/}
+}
+\examples{
+# lists threads of forum=politico in RSS-format
+threads_lists(forum="politico", format="rss")
+
+# use a specific link ending with ".html" (may work if link was not changed)
+art <- "http://www.politico.com/magazine/story/2015/05/fox-news-liberals-118235.html"
+#art <- URLencode(art, reserved = TRUE)
+threads_lists(forum="politico", thread=paste0("link:", art))
 }
 
