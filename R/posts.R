@@ -7,7 +7,8 @@
 #' @param thread integer or string if integer must be unique if string must
 #' have link: or ident:
 #' @param author
-#' @param since integer or string timestamp iso or unixtime.
+#' @param since integer or string: unixtime or iso timestamp
+#' \code{format(Sys.time(), "\%Y-\%m-\%dT\%H:\%M:\%S")}.
 #' @param related
 #' @param cursor
 #' @param attach

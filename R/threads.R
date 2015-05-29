@@ -1,3 +1,4 @@
+#' Disqus Threads API
 #' @export
 threads <- function(...) {
   raw <- fromJSON(listTemplate(resource = "threads", ...))

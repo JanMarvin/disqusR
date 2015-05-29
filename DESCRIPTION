@@ -10,7 +10,7 @@ Authors@R: c(
     email="Sebastian.Jeworutzki@ruhr-uni-bochum.de", role = c("aut", "cre"))
     )
 Description: More about what it does (maybe more than one line)
-License: GPL2
+License: GPL-2
 LazyData: TRUE
 Imports: httr, jsonlite
 ByteCompile: yes

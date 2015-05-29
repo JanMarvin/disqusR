@@ -20,7 +20,8 @@ have link: or ident:}
 
 \item{author}{}
 
-\item{since}{integer or string timestamp iso or unixtime.}
+\item{since}{integer or string: unixtime or iso timestamp
+\code{format(Sys.time(), "\%Y-\%m-\%dT\%H:\%M:\%S")}.}
 
 \item{related}{}
 
