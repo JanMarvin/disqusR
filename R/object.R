@@ -40,39 +40,6 @@ dqThread <- setClass(
   )
 )
 
-# dqAvatar <- setClass(
-#   "disqus post author avatar",
-#   slots = c(
-#     small_permalink = "character",
-#     small_cache = "character",
-#     isCustom = "logical",
-#     permalink = "character",
-#     cache = "character",
-#     large_permalink = "character",
-#     large_cache = "character"
-#   )
-# )
-# dqAuthor <- setClass(
-#   "disqus post author",
-#   slots = c(
-#     usename = "character",
-#     about = "character",
-#     name = "character",
-#     disable3rdPartyTrackers = "logical",
-#     url = "character",
-#     isAnonymous = "logical",
-#     rep = "numeric",
-#     profileUrl= "character",
-#     reputation = "numeric",
-#     location = "character",
-#     isPrivate = "logical",
-#     isPrimary = "logical",
-#     joinedAt = "character", # Date (Y-M-DTH:M:S)
-#     id = "integer",
-#     avatar = "disqus post author avatar" # Da kaeme wieder viel
-#   )
-# )
-
 dqPost <- setClass(
   "disqus post",
   slots = c(
