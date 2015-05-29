@@ -7,7 +7,7 @@
 #' @param thread integer or string if integer must be unique if string must
 #' have link: or ident:
 #' @param author
-#' @param since integer or string timestamp iso or unixtime.
+#' @param since integer or string timestamp in format %Y-%M-%DT%H-%M-%S or unixtime.
 #' @param related
 #' @param cursor
 #' @param attach
@@ -78,8 +78,14 @@ listTemplate <- function(option = NULL,
   }
 
   # []
+  n_rel <- length(related)
+
+  rltd <- NULL
   if (!is.null(related)) {
-    rltd <- paste0("&related=", related)
+    for (i in 1:n_rel) {
+      rltd_i <- paste0("&related=", related)
+      rltd <- paste0(rltd, rltd_i)
+    }
     url <- paste0(url, rltd)
   }
 
@@ -89,15 +95,31 @@ listTemplate <- function(option = NULL,
   }
 
   # []
+  n_att <- length(attach)
+
+  attch <- NULL
   if (!is.null(attach)) {
-    attch <- paste0("&attach=", attach)
+    for (i in 1:n_att) {
+      attch_i <- paste0("&attach=", attach)
+      attch <- paste0(attch, attch_i)
+    }
     url <- paste0(url, attch)
   }
 
+  # the bracket variant does not seem to work.
+  # e.g. attach <- paste(shQuote(attach, type="cmd"), collapse=", ")
+  # attach <- paste0("[ ", attach, " ]")
+
   # [ "open", "closed", "killed" ]
+  n_incl <- length(include)
+
+  incl <- NULL
   if (!is.null(include)) {
-    attch <- paste0("&include=", include)
-    url <- paste0(url, attch)
+    for (i in 1:n_incl) {
+      incl_i <- paste0("&include=", include[i])
+      incl <- paste0(incl, incl_i)
+    }
+    url <- paste0(url, include)
   }
 
   # asc, desc
