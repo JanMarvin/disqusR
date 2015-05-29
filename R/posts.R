@@ -31,6 +31,19 @@
 #'
 #' @export
 posts <- function(...) {
-  listTemplate(resource = "posts", ...)
+
+  # author is a nested data.frame in posts. If not flattend, apply does not work
+  raw <- fromJSON(listTemplate(resource = "posts", ...),
+                  flatten = TRUE)
+  out <- dqPost()
+
+  out <- apply(raw$response, 1, function(x) {
+    out <- dqPost()
+    assignValues(out, x)
+  }
+  )
+
+  return(out)
+
 }
 
