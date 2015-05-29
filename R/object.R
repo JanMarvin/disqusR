@@ -1,44 +1,70 @@
-##                                                                          
+##
 ##  Filename:      object.R
 ##  Creation Date: 28-05-2015
 ##  Last Modified: Do 28 Mai 2015 12:00:28 CEST
-##                                                                          
-##  Description:                                                            
-##                                                                            
-##                                                                            
+##
+##  Description:
+##
+##
 ##
 
 #cat(paste0(names(fromJSON(arts)$response), ' = "',
 #                 sapply(fromJSON(arts)$response, typeof), '",\n'))
 
 dqThread <- setClass(
-                     "disqus thread",
-                     slots = c(
-                               feed = "character",
-                               identifiers = "character",
-                               dislikes = "integer",
-                               likes = "integer",
-                               clean_title_unescaped = "character",
-                               message = "character",
-                               id = "character",
-                               createdAt = "character",
-                               category = "character",
-                               author = "character",
-                               userScore = "integer",
-                               signedLink = "character",
-                               isDeleted = "logical",
-                               raw_message = "character",
-                               isClosed = "logical",
-                               link = "character",
-                               slug = "character",
-                               forum = "character",
-                               clean_title = "character",
-                               posts = "integer",
-                               userSubscription = "logical",
-                               title = "character",
-                               highlightedPost = "logical"
-                               )
-                     )
+  "disqus thread",
+  slots = c(
+    feed = "character",
+    identifiers = "character",
+    dislikes = "integer",
+    likes = "integer",
+    clean_title_unescaped = "character",
+    message = "character",
+    id = "character",
+    createdAt = "character",
+    category = "character",
+    author = "character",
+    userScore = "integer",
+    signedLink = "character",
+    isDeleted = "logical",
+    raw_message = "character",
+    isClosed = "logical",
+    link = "character",
+    slug = "character",
+    forum = "character",
+    clean_title = "character",
+    posts = "integer",
+    userSubscription = "logical",
+    title = "character",
+    highlightedPost = "logical"
+  )
+)
+
+dqPost <- setClass(
+  "disqus thread",
+  slots = c(
+    forum = "integer",
+    parent = "integer",
+    isApproved = "integer",
+    author = "integer", # Das ist ein "data.frame"
+    media = "NULL", #?
+    isDeleted = "logical",
+    isFlagged = "logical",
+    dislikes = "integer",
+    raw_message = "character",
+    createdAt = "date",
+    id = "integer",
+    thread = "integer",
+    numReports = "integer",
+    isDeletedByAuthor = "logical",
+    likes = "integer",
+    isEdited = "logical",
+    message = "character",
+    isSpam = "logical",
+    isHighlighted = "logical",
+    points = "integer"
+  )
+)
 
 # create a method to assign the valuess
 setGeneric(name="assignValues",
@@ -46,7 +72,7 @@ setGeneric(name="assignValues",
            {
              standardGeneric("assignValues")
            }
-           )
+)
 
 setMethod(f="assignValues",
           signature="disqus thread",
@@ -78,14 +104,14 @@ setMethod(f="assignValues",
 
             return(theObject)
           }
-          )
+)
 
 setGeneric(name="getList",
            def=function(theObject)
            {
              standardGeneric("getList")
            }
-           )
+)
 
 setMethod(f="getList",
           signature="disqus thread",
@@ -94,5 +120,5 @@ setMethod(f="getList",
             thePosts <- fromJSON(listTemplate("list", thread=theObject@id, resource = "posts"))$response
             return(thePosts)
           }
-          )
+)
 

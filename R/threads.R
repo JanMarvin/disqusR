@@ -1,8 +1,3 @@
-
-# for our own testing requires remove befor release
-pubkey <- readChar(".pubkey", file.info(".pubkey")$size)
-
-
 #' Disqus Threads API
 #' @param option string close, create, details, list, listHot, listPopular,
 #' listPosts, open, remove, restore, set, subscribe, unsubscribe, update, vote
@@ -36,11 +31,11 @@ pubkey <- readChar(".pubkey", file.info(".pubkey")$size)
 #'
 #' @export
 listTemplate <- function(option = NULL,
-                    category = NULL, forum = NULL, thread = NULL,
-                    author = NULL, since = NULL, related = NULL,
-                    cursor = NULL, attach = NULL, limit = 25,
-                    include = NULL, order = NULL, format = "json",
-                    resource = c("threads","posts")) {
+                         category = NULL, forum = NULL, thread = NULL,
+                         author = NULL, since = NULL, related = NULL,
+                         cursor = NULL, attach = NULL, limit = 25,
+                         include = NULL, order = NULL, format = "json",
+                         resource = c("threads","posts")) {
 
   if (is.null(option))
     stop("No option was called.")
@@ -113,7 +108,6 @@ listTemplate <- function(option = NULL,
     }
   }
 
-
   # GET results
   url <- httr::GET(url)
 
@@ -129,13 +123,24 @@ listTemplate <- function(option = NULL,
 
 
 
+#' @export
 threads <- function(...) {
   raw <- fromJSON(listTemplate(resource = "threads", ...))
   out <- dqThread()
 
-  out <- apply(raw$response, 1, function(x) {out <- dqThread(); assignValues(out, x); return(out)})
+  out <- apply(raw$response, 1, function(x) {
+    out <- dqThread()
+    assignValues(out, x)
+  }
+  )
+
+  return(out)
 }
-posts <- function(...)   {
-  listTemplate(resource = "posts", ...)
+
+#' @export
+posts <- function(...) {
+  raw <- fromJSON(listTemplate(resource = "posts", ...))
+
+  return(raw)
 }
 
