@@ -4,7 +4,7 @@ threads <- function(...) {
 
   class(raw) <- c("dq_thread")
 
-  return(raw)
+  return(raw$response)
 }
 
 #' @export

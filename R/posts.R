@@ -38,7 +38,7 @@ posts <- function(...) {
 
   class(raw) <- c("dq_post")
 
-  return(raw)
+  return(raw$response)
 
 }
 
