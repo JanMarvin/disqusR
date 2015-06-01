@@ -2,6 +2,8 @@
 
 export(category)
 export(forums)
+export(getposts)
+export(getthreadid)
 export(listTemplate)
 export(posts)
 export(postsS4)
