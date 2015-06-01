@@ -41,7 +41,6 @@ listTemplate <- function(option = NULL,
   if (is.null(option))
     stop("No option was called.")
 
-
   disqus_api_url <- "https://disqus.com/api/3.0/"
   resource_url <- paste0(resource,"/")
 
@@ -64,7 +63,14 @@ listTemplate <- function(option = NULL,
   }
 
   if (!is.null(thread)) {
-    thrd <- paste0("&thread=", thread)
+
+    # test if thread is a link.
+    if (length(grep("^(http|https)://", thread))) {
+      thrd <- paste0("&thread=link:", thread)
+    } else {
+      thrd <- paste0("&thread=", thread)
+    }
+
     url <- paste0(url, thrd)
   }
 
