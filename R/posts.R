@@ -39,8 +39,11 @@ posts <- function(...) {
 
   class(raw) <- c("dq_post")
 
-  return(raw$response)
+  pst <- raw$response
 
+  pst <- lapply(pst$raw_message, FUN=gsub, pattern="\n", replacement=" ")
+
+  return(unlist(pst))
 }
 
 #' @export

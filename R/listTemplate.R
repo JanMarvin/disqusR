@@ -65,7 +65,11 @@ listTemplate <- function(option = NULL,
   if (!is.null(thread)) {
 
     # test if thread is a link.
-    if (length(grep("^(http|https)://", thread))) {
+    if (length(grep("^(http|https)", thread))) {
+
+      # disqus requires this
+      thread <- URLencode(thread, reserved = TRUE)
+
       thrd <- paste0("&thread=link:", thread)
     } else {
       thrd <- paste0("&thread=", thread)
