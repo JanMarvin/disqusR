@@ -6,7 +6,45 @@
 \usage{
 threads(...)
 }
+\arguments{
+\item{...}{options: close, create, details, list, listHot, listPopular,
+listPosts, open, remove, restore, set, subscribe, unsubscribe, update, vote
+
+GET functions:
+details
+list
+listHot
+listPopular
+listPosts
+set
+subscribe
+update
+
+POST functions: close,
+create
+open
+remove
+restore
+unsubscribe
+vote -1, 0, 1}
+}
 \description{
-Disqus Threads API
+\code{threads()} is a function to access the disqus threads api. It is built
+as a comfortable wrapper for \code{listTemplate()} a disqusR function
+underlying most of the retrieving (GET) functions of the disqus API. It will
+return an object of class dq_thread, containing the content retrieved.
+By default \code{threads()} will return a json object.
+}
+\details{
+threads() requires at least one option.
+
+For a full documentation and all currently possible options please see
+\url{https://disqus.com/api/docs/threads/}.
+
+As of June 2015 following options are available.
+}
+\examples{
+# list a few disqus threads
+threads("list")
 }
 
