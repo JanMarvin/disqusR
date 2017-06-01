@@ -12,7 +12,8 @@
 #' \url{https://disqus.com/api/docs/threads/}.
 #'
 #' As of June 2015 following options are available.
-#' @param type json or rss
+#' @param option option default NULL
+#' @param type json or rss default json
 #' @param ... options: close, create, details, list, listHot, listPopular,
 #' listPosts, open, remove, restore, set, subscribe, unsubscribe, update, vote
 #'

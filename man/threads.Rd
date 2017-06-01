@@ -7,7 +7,9 @@
 threads(option, type = "json", ...)
 }
 \arguments{
-\item{type}{json or rss}
+\item{option}{option default NULL}
+
+\item{type}{json or rss default json}
 
 \item{...}{options: close, create, details, list, listHot, listPopular,
 listPosts, open, remove, restore, set, subscribe, unsubscribe, update, vote
