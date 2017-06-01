@@ -158,6 +158,11 @@ postTemplate <- function(option = NULL, title = NULL, message = NULL,
     }
   }
 
+  if (limit != 25){
+    lmt <- paste0("&limit=", limit)
+    url <- paste0(url, lmt)
+  }
+
   cat("\n debug::URL: ", url, "\n")
 
   # GET results

@@ -21,3 +21,25 @@ public and a secret key. Both are required to use `disqusR`. If `pubkey` and
 upper limit to the number of requests one can make to `disqus.com`.
 
 A few examples are given in the help files.
+
+```{R}
+library(disqusR)
+
+# insert pubkey and seckey (or parse from file)
+pubkey <- "..."
+seckey <- "..."
+
+# use the websites link
+art <- "http://www.rollingstone.com/music/lists/50-greatest-live-albums-of-all-time-20150429"
+arts <- threads("list" , forum="rollingstone", thread=paste0("link:", art))
+
+# fetch 5 comments
+postslist <- posts("list", thread=arts$id, limit = 5)
+
+# select 100 items after a certain timestamp
+unixtime <- as.numeric(as.POSIXct("2017-05-31", type="%Y-%m-%d"))
+trds <- threads("list", forum="rollingstone", since=unixtime, limit = 100)
+
+str(trds)
+
+```

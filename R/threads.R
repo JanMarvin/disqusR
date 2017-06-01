@@ -14,6 +14,7 @@
 #' As of June 2015 following options are available.
 #' @param option option default NULL
 #' @param type json or rss default json
+#' @param limit integer limit 1 to 100
 #' @param ... options: close, create, details, list, listHot, listPopular,
 #' listPosts, open, remove, restore, set, subscribe, unsubscribe, update, vote
 #'
@@ -44,9 +45,10 @@
 #' threads("list")
 #' }
 #' @export
-threads <- function(option, type = "json", ...) {
+threads <- function(option, type = "json", limit = 25, ...) {
 
-  lT <- listTemplate(option, ressource = "threads", type = type, ...)
+  lT <- listTemplate(option, ressource = "threads", type = type, limit = limit,
+                     ...)
 
   if (type == "json") {
     raw <- fromJSON(lT)$response

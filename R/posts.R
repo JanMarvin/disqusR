@@ -17,11 +17,17 @@
 #' threads("list", forum="politico", since=unixtime)
 #' }
 #' @export
-posts <- function(...) {
+posts <- function(option, type = "json", limit = 25, ...) {
 
   # author is a nested data.frame in posts. If not flattend, apply does not work
-  raw <- fromJSON(listTemplate(ressource = "posts", ...),
-                  flatten = TRUE)
+  lT <- listTemplate(option, ressource = "posts", type = type, limit = limit,
+                     ...)
+
+  if (type == "json") {
+    raw <- fromJSON(lT, flatten = TRUE)$response
+  } else{
+    raw <- lT
+  }
 
   class(raw) <- c("dq_post")
   return(raw)

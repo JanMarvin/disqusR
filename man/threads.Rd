@@ -4,12 +4,14 @@
 \alias{threads}
 \title{Disqus Threads API}
 \usage{
-threads(option, type = "json", ...)
+threads(option, type = "json", limit = 25, ...)
 }
 \arguments{
 \item{option}{option default NULL}
 
 \item{type}{json or rss default json}
+
+\item{limit}{integer limit 1 to 100}
 
 \item{...}{options: close, create, details, list, listHot, listPopular,
 listPosts, open, remove, restore, set, subscribe, unsubscribe, update, vote

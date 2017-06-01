@@ -137,6 +137,13 @@ listTemplate <- function(option = NULL,
     }
   }
 
+  # limit
+
+  if (limit != 25) {
+    lmt <- paste0("&limit=", limit)
+    url <- paste0(url, lmt)
+  }
+
   cat("URL: ", url, "\n")
 
   # GET results
