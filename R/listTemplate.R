@@ -29,7 +29,7 @@ listTemplate <- function(option = NULL,
                          cursor = NULL, attach = NULL, limit = 25,
                          include = NULL, order = "desc", type = "json",
                          ressource = c("threads","posts"), pubkey,
-                         start = NULL, end = NULL) {
+                         start = NULL, end = NULL, priority = NULL) {
 
   if (missing(pubkey)) {
     pubkey <- get0("pubkey", envir = globalenv())
@@ -97,10 +97,14 @@ listTemplate <- function(option = NULL,
     url <- paste0(url, stt)
   }
 
-
   if (!is.null(end)) {
     end <- paste0("&end=", end)
     url <- paste0(url, end)
+  }
+
+  if (!is.null(priority)) {
+    prty <- paste0("&sortType=", "priority")
+    url <- paste0(url, prty)
   }
 
   # []
