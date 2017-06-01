@@ -1,3 +1,23 @@
-#disqusR
+# disqusR
 
-Documentation will be added soon.
+
+`disqusR` is a wrapper around the public disqus API version 3 and allows reading
+threads from disqus forums into R.
+
+Among the many companies that use or used disqus are for instance news sites 
+politico.com^x, wired.com, cnn.com^x and welt.de^x (^x marks companies that 
+appear to no longer use disqus). Lately it looks like many of these
+have dropped disqus as of today only wired.com looks like it is still using
+disqus.
+
+We developed `disqusR`some time ago as a fun project to play around with json
+and playing with word clouds in R. Development was ceased after some initial
+functions were working. Since then it was rotting in a non public git of ours.
+
+To be able to use `disqusR` one has to register at disqus.com. After 
+registration one has to create an app in disqus so that you will retrieve a
+public and a secret key. Both are required to use `disqusR`. If `pubkey` and
+`seckey` are set, one can start parsing comments. Be aware that there is an 
+upper limit to the number of requests one can make to `disqus.com`.
+
+A few examples are given in the help files.
