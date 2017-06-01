@@ -1,6 +1,6 @@
 Package: disqusR
 Type: Package
-Title: Provides a link to the disqus api.
+Title: Provides a link to the disqus api
 Version: 0.1
 Date: 2015-05-27
 Authors@R: c(
@@ -9,7 +9,7 @@ Authors@R: c(
     person("Sebastian", "Jeworutzki",
     email="Sebastian.Jeworutzki@ruhr-uni-bochum.de", role = c("aut", "cre"))
     )
-Description: More about what it does (maybe more than one line)
+Description: R pakckage to access the disqus API. This allows to retrieve posts and threads from a disqus page.
 License: GPL-2
 LazyData: TRUE
 Imports: httr, jsonlite

@@ -6,19 +6,22 @@
 #' @param forum integer/string unique identifier of a forum
 #' @param thread integer or string if integer must be unique if string must
 #' have link: or ident:
-#' @param author
+#' @param author post author
 #' @param since integer or string: unixtime or iso timestamp
 #' \code{format(Sys.time(), "\%Y-\%m-\%dT\%H:\%M:\%S")}.
-#' @param related
-#' @param cursor
-#' @param attach
+#' @param related related
+#' @param cursor cursor
+#' @param attach attach
 #' @param limit integer between 25 (default) and 100 (maximum)
-#' @param include
+#' @param include include
 #' @param order string "desc" (descending) or "asc" (ascending)
 #' @param format string json, jsonp or rss
+#' @param ressource ressource
+#' @param pubkey string containing disqus pubkey
 #' @details Original API Documentation for threads
 #' \code{https://disqus.com/api/docs/threads/}
 #' @examples
+#' \dontrun{
 #' # lists threads of forum=politico in RSS-format
 #' threads("list", forum="politico", format="rss")
 #'
@@ -29,24 +32,30 @@
 #' # use a timestamp
 #' unixtime <- as.numeric(as.POSIXct("2015-05-26", format="%Y-%m-%d"))
 #' threads("list", forum="politico", since=unixtime)
-#'
+#' }
+#' @importFrom utils URLencode
 #' @export
 listTemplate <- function(option = NULL,
                          category = NULL, forum = NULL, thread = NULL,
                          author = NULL, since = NULL, related = NULL,
                          cursor = NULL, attach = NULL, limit = 25,
                          include = NULL, order = NULL, format = "json",
-                         resource = c("threads","posts")) {
+                         ressource = c("threads","posts", pubkey)) {
+
+  if (missing(pubkey)) {
+    pubkey <- get0("pubkey")
+    if (is.null(pubkey)) stop("Abort. No pubkey provided or found.")
+  }
 
   if (is.null(option))
     stop("No option was called.")
 
   disqus_api_url <- "https://disqus.com/api/3.0/"
-  resource_url <- paste0(resource,"/")
+  ressource_url <- paste0(ressource,"/")
 
   # create minimal required link.
   option <- paste0(option, ".", format)
-  url <- paste0(disqus_api_url, resource_url, option)
+  url <- paste0(disqus_api_url, ressource_url, option)
   auth <- paste0("?api_key=", pubkey)
 
   # Add apikey to link

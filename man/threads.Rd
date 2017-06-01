@@ -44,7 +44,8 @@ For a full documentation and all currently possible options please see
 As of June 2015 following options are available.
 }
 \examples{
+\dontrun{
 # list a few disqus threads
 threads("list")
-
+}
 }

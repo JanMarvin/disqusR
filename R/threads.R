@@ -34,12 +34,13 @@
 #' vote -1, 0, 1
 #'
 #' @examples
+#' \dontrun{
 #' # list a few disqus threads
 #' threads("list")
-#'
+#' }
 #' @export
 threads <- function(...) {
-  raw <- fromJSON(listTemplate(resource = "threads", ...))
+  raw <- fromJSON(listTemplate(ressource = "threads", ...))
 
   class(raw) <- c("dq_thread")
 
@@ -61,18 +62,4 @@ getthreadid <- function(thrd=NULL, ...) {
     stop("No thread choosen.")
 
   return(raw$id)
-}
-
-#' @export
-threadsS4 <- function(...) {
-  raw <- fromJSON(listTemplate(resource = "threads", ...))
-  # out <- dqThread()
-
-  out <- apply(raw$response, 1, function(x) {
-    out <- dqThread()
-    assignValues(out, x)
-  }
-  )
-
-  return(out)
 }

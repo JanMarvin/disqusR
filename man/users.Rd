@@ -6,6 +6,9 @@
 \usage{
 users(...)
 }
+\arguments{
+\item{...}{...}
+}
 \description{
 Disqus Users API
 }

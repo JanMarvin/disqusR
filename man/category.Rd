@@ -6,6 +6,9 @@
 \usage{
 category(...)
 }
+\arguments{
+\item{...}{...}
+}
 \description{
 Disqus Category API
 }

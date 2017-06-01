@@ -1,7 +1,8 @@
 #' Disqus Users API
+#' @param ... ...
 #' @export
 users <- function(...) {
-  raw <- fromJSON(listTemplate(resource = "users", ...))
+  raw <- fromJSON(listTemplate(ressource = "users", ...))
 
   class(raw) <- c("dq_users")
 

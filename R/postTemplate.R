@@ -1,21 +1,53 @@
+#' postTemplate
+#' @param option option
+#' @param title title
+#' @param message message
+#' @param category category
+#' @param forum forum
+#' @param thread thread
+#' @param author author
+#' @param since since
+#' @param related related
+#' @param cursor cursor
+#' @param attach attach
+#' @param limit limit
+#' @param include include
+#' @param order order
+#' @param format string default json
+#' @param ressource ressource
+#' @param atoken atorken
+#' @param pubkey pubkey
+#' @param seckey seckey
 #' @export
 postTemplate <- function(option = NULL, title = NULL, message = NULL,
                          category = NULL, forum = NULL, thread = NULL,
                          author = NULL, since = NULL, related = NULL,
                          cursor = NULL, attach = NULL, limit = 25,
                          include = NULL, order = NULL, format = "json",
-                         resource = c("threads","posts"),
-                         atoken = NULL ) {
+                         ressource = c("threads","posts"),
+                         atoken = NULL, pubkey, seckey ) {
+
+
+  if (missing(pubkey)) {
+    pubkey <- get0("pubkey")
+    if (is.null(pubkey)) stop("Abort. No pubkey provided or found.")
+  }
+
+
+  if (missing(seckey)) {
+    seckey <- get0("seckey")
+    if (is.null(seckey)) stop("Abort. No seckey provided or found.")
+  }
 
   if (is.null(option))
     stop("No option was called.")
 
   disqus_api_url <- "https://disqus.com/api/3.0/"
-  resource_url <- paste0(resource,"/")
+  ressource_url <- paste0(ressource,"/")
 
   # create minimal required link.
   option <- paste0(option, ".", format)
-  url <- paste0(disqus_api_url, resource_url, option)
+  url <- paste0(disqus_api_url, ressource_url, option)
 
   # Die Api doku sagt, man braucht einen access_token, den gibt es nur ueber
   # Umwege. Man muss sich dafuer erst authentifizieren, dann kommt eine web-

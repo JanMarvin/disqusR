@@ -6,6 +6,9 @@
 \usage{
 forums(...)
 }
+\arguments{
+\item{...}{...}
+}
 \description{
 Disqus Forums API
 }

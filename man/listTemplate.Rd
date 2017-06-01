@@ -7,7 +7,8 @@
 listTemplate(option = NULL, category = NULL, forum = NULL,
   thread = NULL, author = NULL, since = NULL, related = NULL,
   cursor = NULL, attach = NULL, limit = 25, include = NULL,
-  order = NULL, format = "json", resource = c("threads", "posts"))
+  order = NULL, format = "json", ressource = c("threads", "posts",
+  pubkey))
 }
 \arguments{
 \item{option}{string close, create, details, list, listHot, listPopular,
@@ -21,14 +22,28 @@ Options may differ in their set of Arguments.}
 \item{thread}{integer or string if integer must be unique if string must
 have link: or ident:}
 
+\item{author}{post author}
+
 \item{since}{integer or string: unixtime or iso timestamp
 \code{format(Sys.time(), "\%Y-\%m-\%dT\%H:\%M:\%S")}.}
 
+\item{related}{related}
+
+\item{cursor}{cursor}
+
+\item{attach}{attach}
+
 \item{limit}{integer between 25 (default) and 100 (maximum)}
+
+\item{include}{include}
 
 \item{order}{string "desc" (descending) or "asc" (ascending)}
 
 \item{format}{string json, jsonp or rss}
+
+\item{ressource}{ressource}
+
+\item{pubkey}{string containing disqus pubkey}
 }
 \description{
 Disqus Threads API
@@ -38,6 +53,7 @@ Original API Documentation for threads
 \code{https://disqus.com/api/docs/threads/}
 }
 \examples{
+\dontrun{
 # lists threads of forum=politico in RSS-format
 threads("list", forum="politico", format="rss")
 
@@ -48,5 +64,5 @@ postslist <- posts("list", thread=arts[1,"id"])
 # use a timestamp
 unixtime <- as.numeric(as.POSIXct("2015-05-26", format="\%Y-\%m-\%d"))
 threads("list", forum="politico", since=unixtime)
-
+}
 }
