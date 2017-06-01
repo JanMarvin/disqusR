@@ -7,8 +7,7 @@
 listTemplate(option = NULL, category = NULL, forum = NULL,
   thread = NULL, author = NULL, since = NULL, related = NULL,
   cursor = NULL, attach = NULL, limit = 25, include = NULL,
-  order = NULL, format = "json", ressource = c("threads", "posts",
-  pubkey))
+  order = NULL, type = "json", ressource = c("threads", "posts"), pubkey)
 }
 \arguments{
 \item{option}{string close, create, details, list, listHot, listPopular,
@@ -25,7 +24,7 @@ have link: or ident:}
 \item{author}{post author}
 
 \item{since}{integer or string: unixtime or iso timestamp
-\code{format(Sys.time(), "\%Y-\%m-\%dT\%H:\%M:\%S")}.}
+\code{type(Sys.time(), "\%Y-\%m-\%dT\%H:\%M:\%S")}.}
 
 \item{related}{related}
 
@@ -39,7 +38,7 @@ have link: or ident:}
 
 \item{order}{string "desc" (descending) or "asc" (ascending)}
 
-\item{format}{string json, jsonp or rss}
+\item{type}{string json, jsonp or rss}
 
 \item{ressource}{ressource}
 
@@ -51,18 +50,4 @@ Disqus Threads API
 \details{
 Original API Documentation for threads
 \code{https://disqus.com/api/docs/threads/}
-}
-\examples{
-\dontrun{
-# lists threads of forum=politico in RSS-format
-threads("list", forum="politico", format="rss")
-
-# use a specific link ending with ".html" (may work if link was not changed)
-art <- "http://www.politico.com/magazine/story/2015/05/fox-news-liberals-118235.html"
-arts <- threads("list" , forum="politico", thread=paste0("link:", art))
-postslist <- posts("list", thread=arts[1,"id"])
-# use a timestamp
-unixtime <- as.numeric(as.POSIXct("2015-05-26", format="\%Y-\%m-\%d"))
-threads("list", forum="politico", since=unixtime)
-}
 }

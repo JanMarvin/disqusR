@@ -7,7 +7,7 @@
 postTemplate(option = NULL, title = NULL, message = NULL,
   category = NULL, forum = NULL, thread = NULL, author = NULL,
   since = NULL, related = NULL, cursor = NULL, attach = NULL,
-  limit = 25, include = NULL, order = NULL, format = "json",
+  limit = 25, include = NULL, order = NULL, type = "json",
   ressource = c("threads", "posts"), atoken = NULL, pubkey, seckey)
 }
 \arguments{
@@ -39,7 +39,7 @@ postTemplate(option = NULL, title = NULL, message = NULL,
 
 \item{order}{order}
 
-\item{format}{string default json}
+\item{type}{string default json}
 
 \item{ressource}{ressource}
 

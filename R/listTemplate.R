@@ -8,42 +8,29 @@
 #' have link: or ident:
 #' @param author post author
 #' @param since integer or string: unixtime or iso timestamp
-#' \code{format(Sys.time(), "\%Y-\%m-\%dT\%H:\%M:\%S")}.
+#' \code{type(Sys.time(), "\%Y-\%m-\%dT\%H:\%M:\%S")}.
 #' @param related related
 #' @param cursor cursor
 #' @param attach attach
 #' @param limit integer between 25 (default) and 100 (maximum)
 #' @param include include
 #' @param order string "desc" (descending) or "asc" (ascending)
-#' @param format string json, jsonp or rss
+#' @param type string json, jsonp or rss
 #' @param ressource ressource
 #' @param pubkey string containing disqus pubkey
 #' @details Original API Documentation for threads
 #' \code{https://disqus.com/api/docs/threads/}
-#' @examples
-#' \dontrun{
-#' # lists threads of forum=politico in RSS-format
-#' threads("list", forum="politico", format="rss")
-#'
-#' # use a specific link ending with ".html" (may work if link was not changed)
-#' art <- "http://www.politico.com/magazine/story/2015/05/fox-news-liberals-118235.html"
-#' arts <- threads("list" , forum="politico", thread=paste0("link:", art))
-#' postslist <- posts("list", thread=arts[1,"id"])
-#' # use a timestamp
-#' unixtime <- as.numeric(as.POSIXct("2015-05-26", format="%Y-%m-%d"))
-#' threads("list", forum="politico", since=unixtime)
-#' }
 #' @importFrom utils URLencode
 #' @export
 listTemplate <- function(option = NULL,
                          category = NULL, forum = NULL, thread = NULL,
                          author = NULL, since = NULL, related = NULL,
                          cursor = NULL, attach = NULL, limit = 25,
-                         include = NULL, order = NULL, format = "json",
-                         ressource = c("threads","posts", pubkey)) {
+                         include = NULL, order = NULL, type = "json",
+                         ressource = c("threads","posts"), pubkey) {
 
   if (missing(pubkey)) {
-    pubkey <- get0("pubkey")
+    pubkey <- get0("pubkey", envir = globalenv())
     if (is.null(pubkey)) stop("Abort. No pubkey provided or found.")
   }
 
@@ -54,7 +41,7 @@ listTemplate <- function(option = NULL,
   ressource_url <- paste0(ressource,"/")
 
   # create minimal required link.
-  option <- paste0(option, ".", format)
+  option <- paste0(option, ".", type)
   url <- paste0(disqus_api_url, ressource_url, option)
   auth <- paste0("?api_key=", pubkey)
 
@@ -155,7 +142,7 @@ listTemplate <- function(option = NULL,
   # GET results
   url <- httr::GET(url)
 
-  # convert url to readable output of format
+  # convert url to readable output of type
   erg <- httr::content(url, as = "text")
 
   return(erg)

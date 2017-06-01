@@ -13,7 +13,7 @@
 #' @param limit limit
 #' @param include include
 #' @param order order
-#' @param format string default json
+#' @param type string default json
 #' @param ressource ressource
 #' @param atoken atorken
 #' @param pubkey pubkey
@@ -23,19 +23,19 @@ postTemplate <- function(option = NULL, title = NULL, message = NULL,
                          category = NULL, forum = NULL, thread = NULL,
                          author = NULL, since = NULL, related = NULL,
                          cursor = NULL, attach = NULL, limit = 25,
-                         include = NULL, order = NULL, format = "json",
+                         include = NULL, order = NULL, type = "json",
                          ressource = c("threads","posts"),
                          atoken = NULL, pubkey, seckey ) {
 
 
   if (missing(pubkey)) {
-    pubkey <- get0("pubkey")
+    pubkey <- get0("pubkey", envir = globalenv())
     if (is.null(pubkey)) stop("Abort. No pubkey provided or found.")
   }
 
 
   if (missing(seckey)) {
-    seckey <- get0("seckey")
+    seckey <- get0("seckey", envir = globalenv())
     if (is.null(seckey)) stop("Abort. No seckey provided or found.")
   }
 
@@ -46,7 +46,7 @@ postTemplate <- function(option = NULL, title = NULL, message = NULL,
   ressource_url <- paste0(ressource,"/")
 
   # create minimal required link.
-  option <- paste0(option, ".", format)
+  option <- paste0(option, ".", type)
   url <- paste0(disqus_api_url, ressource_url, option)
 
   # Die Api doku sagt, man braucht einen access_token, den gibt es nur ueber
@@ -163,7 +163,7 @@ postTemplate <- function(option = NULL, title = NULL, message = NULL,
   # GET results
   url <- httr::POST(url)
 
-  # convert url to readable output of format
+  # convert url to readable output of type
   # erg <- httr::content(url, as = "text")
 
   return(url)

@@ -4,9 +4,11 @@
 \alias{threads}
 \title{Disqus Threads API}
 \usage{
-threads(...)
+threads(option, type = "json", ...)
 }
 \arguments{
+\item{type}{json or rss}
+
 \item{...}{options: close, create, details, list, listHot, listPopular,
 listPosts, open, remove, restore, set, subscribe, unsubscribe, update, vote
 
@@ -45,6 +47,9 @@ As of June 2015 following options are available.
 }
 \examples{
 \dontrun{
+# lists threads of forum=politico in RSS-type
+threads("list", forum="politico", type="rss")
+
 # list a few disqus threads
 threads("list")
 }
