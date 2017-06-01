@@ -4,7 +4,7 @@
 \alias{posts}
 \title{Disqus Posts API}
 \usage{
-posts(...)
+posts(option, type = "json", limit = 25, ...)
 }
 \arguments{
 \item{...}{listTemplate option.}

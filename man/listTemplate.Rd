@@ -7,7 +7,8 @@
 listTemplate(option = NULL, category = NULL, forum = NULL,
   thread = NULL, author = NULL, since = NULL, related = NULL,
   cursor = NULL, attach = NULL, limit = 25, include = NULL,
-  order = NULL, type = "json", ressource = c("threads", "posts"), pubkey)
+  order = NULL, type = "json", ressource = c("threads", "posts"), pubkey,
+  start = NULL)
 }
 \arguments{
 \item{option}{string close, create, details, list, listHot, listPopular,
@@ -43,6 +44,8 @@ have link: or ident:}
 \item{ressource}{ressource}
 
 \item{pubkey}{string containing disqus pubkey}
+
+\item{start}{start timestamp}
 }
 \description{
 Disqus Threads API

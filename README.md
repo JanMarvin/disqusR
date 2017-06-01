@@ -43,3 +43,37 @@ trds <- threads("list", forum="rollingstone", since=unixtime, limit = 100)
 str(trds)
 
 ```
+
+Since you can read a maximum of 100 entries, lets have a look how to read more
+than 100 comments of a post.
+
+```{R}
+# use the websites link (may work if link was not changed)
+art <- "http://www.rollingstone.com/music/lists/50-greatest-live-albums-of-all-time-20150429"
+arts <- threads("list" , forum="rollingstone", thread=paste0("link:", art))
+
+postslist <- posts("list", thread=arts$id, limit = 5)
+
+# ascending
+postslist <- posts("list", thread=arts$id, order = "asc", limit = 5)
+
+postslist$author.name
+
+pl1 <- postslist$raw_message
+
+
+# last timestamp in iso form
+time <- postslist$createdAt[5]
+
+
+postslist <- posts("list", thread=arts$id, order = "asc", limit = 5,
+                   start = time)
+
+# should start with the last name
+postslist$author.name
+
+pl2 <- postslist$raw_message[2:5]
+
+p <- c(pl1, pl2)
+p
+```

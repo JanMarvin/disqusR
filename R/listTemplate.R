@@ -18,6 +18,7 @@
 #' @param type string json, jsonp or rss
 #' @param ressource ressource
 #' @param pubkey string containing disqus pubkey
+#' @param start start timestamp
 #' @details Original API Documentation for threads
 #' \code{https://disqus.com/api/docs/threads/}
 #' @importFrom utils URLencode
@@ -26,8 +27,9 @@ listTemplate <- function(option = NULL,
                          category = NULL, forum = NULL, thread = NULL,
                          author = NULL, since = NULL, related = NULL,
                          cursor = NULL, attach = NULL, limit = 25,
-                         include = NULL, order = NULL, type = "json",
-                         ressource = c("threads","posts"), pubkey) {
+                         include = NULL, order = "desc", type = "json",
+                         ressource = c("threads","posts"), pubkey,
+                         start = NULL, end = NULL) {
 
   if (missing(pubkey)) {
     pubkey <- get0("pubkey", envir = globalenv())
@@ -74,6 +76,12 @@ listTemplate <- function(option = NULL,
     url <- paste0(url, thrd)
   }
 
+  # asc, desc
+  if (order!="desc") {
+    ordr <- paste0("&order=", order)
+    url <- paste0(url, ordr)
+  }
+
   if (!is.null(author)) {
     athr <- paste0("&author=", author)
     url <- paste0(url, athr)
@@ -82,6 +90,17 @@ listTemplate <- function(option = NULL,
   if (!is.null(since)) {
     snc <- paste0("&since=", since)
     url <- paste0(url, snc)
+  }
+
+  if (!is.null(start)) {
+    stt <- paste0("&start=", start)
+    url <- paste0(url, stt)
+  }
+
+
+  if (!is.null(end)) {
+    end <- paste0("&end=", end)
+    url <- paste0(url, end)
   }
 
   # []
@@ -127,14 +146,6 @@ listTemplate <- function(option = NULL,
       incl <- paste0(incl, incl_i)
     }
     url <- paste0(url, include)
-  }
-
-  # asc, desc
-  if (option == "list") {
-    if (order!="desc") {
-      ordr <- paste0("&order=", order)
-      url <- paste0(url, ordr)
-    }
   }
 
   # limit
